@@ -23,12 +23,14 @@
 					include 'config.php';
 					include 'opendb.php';
 
-					$fname = (isset($_POST['fname'])    ? $_POST['fname']   : '');
-					$lname = (isset($_POST['lname'])    ? $_POST['lname']   : '');
+					$clientid = (isset($_POST['clientid'])    ? $_POST['clientid']   : '');
+					//$fname = (isset($_POST['fname'])    ? $_POST['fname']   : '');
+				//	$lname = (isset($_POST['lname'])    ? $_POST['lname']   : '');
 
 					$sql= "SELECT clients.clientID, clients.fname, clients.lname, membership.category, membership.description  from clients
 					JOIN membership on clients.clientID = membership.clientID
-					ORDER BY clients.lname ASC '$conf_num' LIMIT 100";
+					WHERE clients.clientid = '$clientid'
+					ORDER BY clients.lname ASC '$clientid' LIMIT 100";
 					$result = mysqli_query($conn, $sql);
 
 					if (mysqli_num_rows($result) > 0) {
